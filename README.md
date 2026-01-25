@@ -31,9 +31,9 @@ Predict apartment prices in Seoul using machine learning models trained on Seoul
 
 ### B. Feature Engineering
 **Added 3 engineered features:**
-- 'build_year': the year the apartment was built
-- 'build_month': the month the apartment was built
-- 'building_age': the age of the building (as of 2026)
+- `build_year`: the year the apartment was built
+- `build_month`: the month the apartment was built
+- `building_age`: the age of the building (as of 2026)
 
 ### C. Final Feature Set
 **10 total features for modeling**
