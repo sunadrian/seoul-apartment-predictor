@@ -37,8 +37,9 @@ Predict apartment prices in Seoul using machine learning models trained on Seoul
 
 ### C. Final Feature Set
 **10 total features for modeling**
-- 7 original features
+- 6 original features
 - 3 engineered features
+- 1 target (`avg_sales`)
 
 ## Feature Details
 - lat,lng: latitude and longitude of the apartment respectfully
