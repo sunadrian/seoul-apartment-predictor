@@ -6,7 +6,7 @@ Predict apartment prices in Seoul using machine learning models trained on Seoul
 ## Dataset:
 - **Source**: [Kaggle - Seoul Real Estate Datasets] https://www.kaggle.com/datasets/jcy1996/seoul-real-estate-datasets
 - **Size**: 4,021 rows, 11 columns
-- **Key Features**: Coordinates (lat/lng), area (m^2), floor count (p), households, , building date, quality score
+- **Key Features**: Coordinates (lat/lng), area (m^2), floor count (p), households, building date, quality score
 - **Target**: `avg_sales` - Average apartment price in complex (Korean Won)
 
 ## Data Preprocessing
