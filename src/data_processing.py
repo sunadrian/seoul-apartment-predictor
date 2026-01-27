@@ -34,11 +34,6 @@ def wrangle(filepath):
     # Removing negative ages (future buildings) if any
     df = df[df["building_age"] >= 0]
 
-    # Removing outliers in sales (target variable)
-    low_quart = df['avg_sales'].quantile(0.01)
-    high_quart = df['avg_sales'].quantile(0.99)
-    df = df[(df['avg_sales'] >= low_quart) & (df['avg_sales'] <= high_quart)]
-
     # dropping min_sales and max_sales to prevent leakage
     # dropping id to prevent over-fitting
     df = df.drop(columns = ["id", "min_sales", "max_sales", "buildDate"])
@@ -46,3 +41,31 @@ def wrangle(filepath):
     # resetting index
     df = df.reset_index(drop = True)
     return df
+    
+if __name__ == "__main__":
+    test_data = pd.DataFrame({
+        'id': [1, 2],
+        'lat': [37.5, 37.6],
+        'lng': [127.0, 126.9],
+        'households': [100, 200],
+        'buildDate': [201501, 200812],
+        'score': [4.5, 3.8],
+        'm2': [84.5, 59.2],
+        'p': [15, 8],
+        'min_sales': [300000000, 250000000],
+        'max_sales': [500000000, 350000000],
+        'avg_sales': [400000000, 300000000]
+    })
+    import tempfile
+
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as f:
+        test_data.to_csv(f.name, index=False)
+        filepath = f.name
+    
+    try:
+        result = wrangle(filepath)
+        print(f"   Result shape: {result.shape}")
+        print(f"   Columns: {list(result.columns)}")
+        print(f"   Sample building_age: {result.iloc[0]['building_age']}")
+    except Exception as e:
+        print(f"❌ Smoke test failed: {e}")
