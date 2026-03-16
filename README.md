@@ -47,3 +47,21 @@ Predict apartment prices in Seoul using machine learning models trained on Seoul
 - p: number of floors
 - households: number of households in residence
 - score: total evaluation (out of 5 stars)
+
+
+## Model Development
+
+### **The Problem & Solution**
+Built a regression model that predicts `avg_price` with 77% accuracy (R²). Key challenge was overcoming initial catastrophic failure where XGBoost performed worse than random guessing - fixed by ensuring consistent data transformation across all models.
+
+### **Technical Journey**
+- **Dataset**: 3,931 samples → 80/20 train-test split using Simple Train-Test Split
+- **Models Tested**: Ridge Regression, XGBoost, Random Forest
+- **Key Fix**: Applied `log1p` transformation to handle skewed target distribution
+- **Best Model**: Regularized XGBoost with careful overfitting control
+- **Final Performance**: 77% R² on test set with 16.5% average error
+
+### **Key Insights**
+1. **Data consistency matters**: Different preprocessing for different models invalidates comparisons
+2. **Overfitting control**: Achieved acceptable generalization gap (0.12) for medium-sized dataset
+3. **Model selection**: Tree-based models (XGBoost) outperformed linear models (Ridge) 2.3×
