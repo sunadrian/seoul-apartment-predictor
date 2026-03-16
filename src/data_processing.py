@@ -37,6 +37,18 @@ def wrangle(filepath):
     # dropping id to prevent over-fitting
     df = df.drop(columns = ["id", "min_sales", "max_sales", "buildDate"])
 
+    # creating new column 'dist_to_gangnam'
+    gangnam_lat, gangnam_lng = 37.4979, 127.0276
+    def haversine_distance(lat1, lng1, lat2, lng2):
+        earth_radius_km = 6371
+        phi1, phi2 = np.radians(lat1), np.radians(lat2)
+        dphi = np.radians(lat2 - lat1)
+        dlambda = np.radians(lng2 - lng1)
+        a = np.sin(dphi/2)**2 + np.cos(phi1)*np.cos(phi2)*np.sin(dlambda/2)**2
+        return 2 * R * np.arctan2(np.sqrt(a), np.sqrt(1-a))
+    
+    df['dist_to_gangnam'] = haversine_distance(df['lat'], df['lng'], gangnam_lat, gangnam_lng)
+
     # resetting index
     df = df.reset_index(drop = True)
     return df
